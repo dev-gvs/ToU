@@ -1,8 +1,9 @@
-# GVS03_Jsoup
+# Toraighyrov University App
 
 ## Разработка программ для мобильных устройств
 
-### Задание №8, 3 вариант
+### Курсовая работа
 
 ![Screenshot1](1.png)
 ![Screenshot2](2.png)
+![Screenshot2](3.png)

@@ -4,6 +4,4 @@
 
 ### Курсовая работа
 
-![Screenshot1](1.png)
-![Screenshot2](2.png)
-![Screenshot2](3.png)
+![](demo.gif)

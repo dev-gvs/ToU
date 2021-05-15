@@ -7,10 +7,10 @@ buildscript {
     }
 
     ext.nav_version = '2.3.5'
-    ext.hilt_version = '2.35'
+    ext.hilt_version = '2.35.1'
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.0'
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"

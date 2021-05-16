@@ -3,6 +3,7 @@
 /local.properties
 /.idea/caches
 /.idea/libraries
+/.idea/sonarlint
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
@@ -10,6 +11,7 @@
 .DS_Store
 /build
 /captures
+app/release
 .externalNativeBuild
 .cxx
 local.properties

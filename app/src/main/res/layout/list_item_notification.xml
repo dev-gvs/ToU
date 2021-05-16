@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -16,17 +15,18 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?colorSurface"
             android:padding="16dp">
 
             <TextView
                 android:id="@+id/textViewMain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#24292E"
+                android:textColor="?colorOnSurface"
                 app:layout_constraintBottom_toTopOf="@+id/textViewDate"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Международная научная конференция молодых ученых, магистрантов, студентов и школьников «ХХI Сатпаевские чтения»\n\nВнимание! Пленарное заседание конференции состоится\n\n12 апреля 2021 года в 11:00 часов (приложение: программа заседания)\n\nПодключиться к конференции Zoom\nhttps://zoom.us/j/95345052475?pwd=eDd3bzM4bVprdnVWMXI2UmtPTUNtUT09\n\nИдентификатор конференции: 953 4505 2475\nКод доступа: 181886\n\nПосмотреть видео-трансляцию: https://youtu.be/KxzFovd1n3c" />
+                tools:text="@tools:sample/lorem/random" />
 
             <TextView
                 android:id="@+id/textViewDate"

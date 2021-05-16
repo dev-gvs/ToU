@@ -13,13 +13,15 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="tabStyle">@style/Theme.ToU.TabLayout</item>
+        <item name="colorOnBackground">@color/black</item>
+        <item name="colorOnSurface">@color/black</item>
     </style>
 
     <style name="Theme.ToU.TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="tabIndicatorColor">?colorOnPrimary</item>
         <item name="tabBackground">?colorPrimary</item>
         <item name="tabSelectedTextColor">?colorOnPrimary</item>
-        <item name="tabTextColor">@color/white_muted</item>
+        <item name="tabTextColor">@color/white_medium_emphasis</item>
     </style>
 
     <style name="Theme.ToU.NoActionBar">

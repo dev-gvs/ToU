@@ -77,7 +77,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:lineSpacingExtra="8sp"
-                android:textColor="#24292E"
+                android:textColor="?colorOnBackground"
                 android:textSize="18sp"
                 tools:text="@tools:sample/lorem/random" />
         </LinearLayout>

@@ -85,4 +85,7 @@ dependencies {
 
     // ViewBindingPropertyDelegate
     implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.0-beta01'
+
+    // Stfalcon ImageViewer
+    implementation 'com.github.stfalcon-studio:StfalconImageViewer:v1.0.1'
 }

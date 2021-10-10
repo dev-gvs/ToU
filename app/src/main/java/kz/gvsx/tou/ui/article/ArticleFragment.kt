@@ -8,40 +8,36 @@ import android.graphics.Point
 import android.graphics.Rect
 import android.graphics.RectF
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
+import kz.gvsx.tou.R
 import kz.gvsx.tou.databinding.FragmentArticleBinding
 
 private const val shortAnimationDuration: Int = 200
 
 @AndroidEntryPoint
-class ArticleFragment : Fragment() {
+class ArticleFragment : Fragment(R.layout.fragment_article) {
 
-    private var _binding: FragmentArticleBinding? = null
-    private val binding get() = _binding!!
-
-    private var currentAnimator: Animator? = null
-
+    private val binding: FragmentArticleBinding by viewBinding()
     private val viewModel: ArticleViewModel by viewModels()
+    private val args: ArticleFragmentArgs by navArgs()
+
     private val imagesAdapter = ImagesAdapter { image, view ->
         zoomImageFromThumb(view, image)
     }
-    private val args: ArticleFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentArticleBinding.inflate(inflater, container, false)
+    private var currentAnimator: Animator? = null
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
             toolbar.title = args.title
@@ -52,29 +48,23 @@ class ArticleFragment : Fragment() {
 
         viewModel.fetchArticle(args.articleLink)
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         binding.recyclerView.apply {
             adapter = imagesAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
-        viewModel.images.observe(viewLifecycleOwner, { images ->
-            imagesAdapter.submitList(images)
-        })
 
-        viewModel.text.observe(viewLifecycleOwner, { text ->
+        viewModel.images.observe(viewLifecycleOwner) { images ->
+            imagesAdapter.submitList(images)
+        }
+
+        viewModel.text.observe(viewLifecycleOwner) { text ->
             binding.textView.text = text
-        })
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding.recyclerView.adapter = null
-        _binding = null
     }
 
     // https://developer.android.com/training/animation/zoom

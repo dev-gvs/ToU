@@ -82,4 +82,7 @@ dependencies {
 
     // Coil
     implementation 'io.coil-kt:coil:1.4.0'
+
+    // ViewBindingPropertyDelegate
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.0-beta01'
 }

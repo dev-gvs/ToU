@@ -1,13 +1,12 @@
 package kz.gvsx.tou
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kz.gvsx.tou.databinding.FragmentHomeViewPagerBinding
@@ -17,16 +16,12 @@ import kz.gvsx.tou.ui.notifications.NotificationsFragment
 private const val NUM_PAGES = 2
 
 @AndroidEntryPoint
-class HomeViewPagerFragment : Fragment() {
+class HomeViewPagerFragment : Fragment(R.layout.fragment_home_view_pager) {
 
-    private var _binding: FragmentHomeViewPagerBinding? = null
-    private val binding get() = _binding!!
+    private val binding: FragmentHomeViewPagerBinding by viewBinding()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeViewPagerBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.viewPager.adapter = PagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
 
@@ -36,13 +31,6 @@ class HomeViewPagerFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = tabPositionToTitle[position]
         }.attach()
-
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private inner class PagerAdapter(fragment: FragmentManager, lifecycle: Lifecycle) :

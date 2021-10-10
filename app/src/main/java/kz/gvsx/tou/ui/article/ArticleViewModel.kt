@@ -24,19 +24,17 @@ class ArticleViewModel @Inject constructor() : ViewModel() {
     fun fetchArticle(url: String) {
         viewModelScope.launch {
             val doc = getDoc(url)
-            val article = doc.selectFirst("div[itemprop = articleBody]")
+            doc.selectFirst("div[itemprop = articleBody]")?.let { article ->
+                val images = article.select("img").map { img ->
+                    img.attr("abs:src")
+                }
+                _images.postValue(images)
 
-            val images = mutableListOf<String>()
-            for (img in article.select("img")) {
-                images.add(img.attr("abs:src"))
+                val paragraphs = article.select("p").map { p ->
+                    p.text()
+                }
+                _text.postValue(paragraphs.filterNot { it.isBlank() }.joinToString("\n\n"))
             }
-            _images.postValue(images)
-
-            val paragraphs = mutableListOf<String>()
-            for (p in article.select("p")) {
-                paragraphs.add(p.text())
-            }
-            _text.postValue(paragraphs.filterNot { it.isBlank() }.joinToString("\n\n"))
         }
     }
 

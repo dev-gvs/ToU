@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.jsoup.nodes.Element
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -31,30 +30,33 @@ class NewsViewModel @Inject constructor() : ViewModel() {
     fun fetchNews() {
         viewModelScope.launch {
             val doc = getDoc()
-            val newsDiv: Element = doc.selectFirst("div.row > div.col.s12 > div.news-list")
+            doc.selectFirst("div.row > div.col.s12 > div.news-list")?.let { newsDiv ->
+                val news = newsDiv.select("div.row").map { row ->
+                    val titleDiv = row.selectFirst("div.news-list-title")
 
-            val news = mutableListOf<News>()
+                    val imageUrl = row
+                        .selectFirst("div.news-list-image")
+                        ?.selectFirst("img")
+                        ?.attr("abs:src") ?: ""
+                    val title = titleDiv
+                        ?.selectFirst("a")
+                        ?.text() ?: ""
+                    val dateTime = titleDiv
+                        ?.selectFirst("div.date")
+                        ?.text()
+                    val linkToArticle = "https://tou.edu.kz/ru" + titleDiv
+                        ?.selectFirst("a")
+                        ?.attr("href")
 
-            for (row in newsDiv.select("div.row")) {
-                val titleDiv = row.selectFirst("div.news-list-title")
-
-                val imageUrl =
-                    row.selectFirst("div.news-list-image").selectFirst("img").attr("abs:src")
-                val title = titleDiv.selectFirst("a").text()
-                val dateTime = titleDiv.selectFirst("div.date").text()
-                val linkToArticle = "https://tou.edu.kz/ru" + titleDiv.selectFirst("a").attr("href")
-
-                news.add(
                     News(
                         imageUrl,
                         title,
                         LocalDateTime.from(dateTimeFormatter.parse(dateTime)),
                         linkToArticle
                     )
-                )
+                }
+                _news.postValue(news)
             }
-
-            _news.postValue(news.toList())
         }
     }
 

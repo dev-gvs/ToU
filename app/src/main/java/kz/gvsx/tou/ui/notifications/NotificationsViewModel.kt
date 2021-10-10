@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.jsoup.nodes.Element
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -27,23 +26,19 @@ class NotificationsViewModel @Inject constructor() : ViewModel() {
     fun fetchNotifications() {
         viewModelScope.launch {
             val doc = getDoc()
-            val notificationsDiv: Element = doc.selectFirst("div.notification")
-
-            val notifications = mutableListOf<Notification>()
-
-            for (notification in notificationsDiv.children()) {
-                val element: Element = notification.selectFirst("div.introtext")
-                val date: String = notification.selectFirst("div.details > div > span").text()
-
-                // Convert relative paths into absolute.
-                for (url in element.select("a[href]")) {
-                    url.attr("href", url.absUrl("href"))
+            doc.selectFirst("div.notification")?.let { notificationsDiv ->
+                val notifications = notificationsDiv.children().map { notification ->
+                    notification.selectFirst("div.introtext")?.let { element ->
+                        val date = notification.selectFirst("div.details > div > span")?.text()
+                        // Convert relative paths into absolute.
+                        element.select("a[href]").forEach { url ->
+                            url.attr("href", url.absUrl("href"))
+                        }
+                        Notification(element, LocalDate.parse(date))
+                    }
                 }
-
-                notifications.add(Notification(element, LocalDate.parse(date)))
+                _notifications.postValue(notifications.filterNotNull())
             }
-
-            _notifications.postValue(notifications.toList())
         }
     }
 

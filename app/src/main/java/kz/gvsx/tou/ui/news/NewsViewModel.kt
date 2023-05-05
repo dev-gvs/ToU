@@ -61,6 +61,9 @@ class NewsViewModel @Inject constructor() : ViewModel() {
     }
 
     private suspend fun getDoc(): Document = withContext(Dispatchers.IO) {
-        Jsoup.connect("https://tou.edu.kz/ru/component/news").get()
+        Jsoup
+            .connect("https://tou.edu.kz/ru/component/news")
+            .ignoreHttpErrors(true)
+            .get()
     }
 }

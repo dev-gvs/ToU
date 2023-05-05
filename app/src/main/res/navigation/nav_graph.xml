@@ -29,5 +29,4 @@
             android:name="title"
             app:argType="string" />
     </fragment>
-
 </navigation>

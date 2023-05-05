@@ -10,14 +10,14 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import kz.gvsx.tou.databinding.ListItemImageBinding
 
-class ImagesAdapter(private val clickListener: (Int, View) -> Unit) :
-    ListAdapter<String, ImagesAdapter.ViewHolder>(ImagesDiffCallback) {
+class ImagesAdapter(
+    private val clickListener: (Int, View) -> Unit
+) : ListAdapter<String, ImagesAdapter.ViewHolder>(ImagesDiffCallback) {
 
     class ViewHolder(
         val binding: ListItemImageBinding,
         clickAtPosition: (Int, View) -> Unit
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.imageThumb.setOnClickListener {

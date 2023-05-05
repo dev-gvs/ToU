@@ -25,8 +25,10 @@ class HomeViewPagerFragment : Fragment(R.layout.fragment_home_view_pager) {
 
         binding.viewPager.adapter = PagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
 
-        val tabPositionToTitle =
-            mapOf(0 to getString(R.string.tab_news), 1 to getString(R.string.tab_notifications))
+        val tabPositionToTitle = mapOf(
+            0 to getString(R.string.tab_news),
+            1 to getString(R.string.tab_notifications)
+        )
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = tabPositionToTitle[position]
@@ -39,7 +41,7 @@ class HomeViewPagerFragment : Fragment(R.layout.fragment_home_view_pager) {
         override fun createFragment(position: Int): Fragment = when (position) {
             0 -> NewsFragment()
             1 -> NotificationsFragment()
-            else -> throw IndexOutOfBoundsException("Not valid position for HomeViewPagerFragment.PagerAdapter.createFragment()")
+            else -> error("Not valid position for HomeViewPagerFragment.PagerAdapter.createFragment()")
         }
     }
 }

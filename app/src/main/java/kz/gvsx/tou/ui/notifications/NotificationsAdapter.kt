@@ -14,8 +14,9 @@ import java.time.format.DateTimeFormatter
 class NotificationsAdapter :
     ListAdapter<Notification, NotificationsAdapter.ViewHolder>(NotificationDiffCallback) {
 
-    class ViewHolder(private val binding: ListItemNotificationBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+        private val binding: ListItemNotificationBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(notification: Notification) = with(binding) {
             textViewMain.text = notification.text
             textViewMain.movementMethod = BetterLinkMovementMethod.getInstance()

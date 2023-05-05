@@ -39,6 +39,10 @@ class ArticleViewModel @Inject constructor() : ViewModel() {
     }
 
     private suspend fun getDoc(url: String): Document = withContext(Dispatchers.IO) {
-        Jsoup.connect(url).followRedirects(true).get()
+        Jsoup
+            .connect(url)
+            .ignoreHttpErrors(true)
+            .followRedirects(true)
+            .get()
     }
 }

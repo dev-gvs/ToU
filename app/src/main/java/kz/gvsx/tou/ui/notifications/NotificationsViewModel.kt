@@ -43,6 +43,10 @@ class NotificationsViewModel @Inject constructor() : ViewModel() {
     }
 
     private suspend fun getDoc(): Document = withContext(Dispatchers.IO) {
-        Jsoup.connect("https://tou.edu.kz/ru/component/notifications").timeout(5000).get()
+        Jsoup
+            .connect("https://tou.edu.kz/ru/component/notifications")
+            .ignoreHttpErrors(true)
+            .timeout(5000)
+            .get()
     }
 }

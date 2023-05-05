@@ -13,14 +13,14 @@ import java.time.Year
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-class NewsAdapter(private val clickListener: (News, View) -> Unit) :
-    ListAdapter<News, NewsAdapter.ViewHolder>(NewsDiffCallback) {
+class NewsAdapter(
+    private val clickListener: (News, View) -> Unit
+) : ListAdapter<News, NewsAdapter.ViewHolder>(NewsDiffCallback) {
 
     class ViewHolder(
         private val binding: ListItemNewsBinding,
         clickAtPosition: (Int, View) -> Unit
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.newsContainer.setOnClickListener {

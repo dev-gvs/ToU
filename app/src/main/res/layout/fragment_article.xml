@@ -35,9 +35,7 @@
                 app:navigationIcon="?attr/homeAsUpIndicator"
                 app:popupTheme="@style/Theme.ToU.PopupOverlay"
                 tools:title="@tools:sample/lorem/random" />
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -82,4 +80,3 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
